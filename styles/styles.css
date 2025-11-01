@@ -1,0 +1,99 @@
+html{
+    height: 100%;
+    width: 100%;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background: var(--clr-surface-a0);
+    position: relative;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+
+h1, h2, h3, h4, h5, h6, p{
+    color: var(--clr-light-a0);
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: "Montserrat", sans-serif;
+}
+
+p{
+    font-family: "Source Sans 3", sans-serif;
+}
+
+button{
+    padding: 10px 40px 10px 40px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--clr-light-a0);
+    font-family:  "Montserrat", sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.attention{
+    background-color: var(--clr-primary-a10);
+    color: var(--clr-light-a0);
+}
+
+
+.centered-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/*Header styles*/
+header{
+    background-color: var(--clr-surface-a10);
+    padding: 0 25px 0 25px;
+}
+
+#account-button-container{
+    margin-left: auto;
+    align-content: center;
+    gap: 25px
+}
+/*End section*/
+
+
+/*Main view styles*/
+.title{
+    font-size: 8rem;
+    margin: 0;
+}
+
+.text-gradient {
+  color: #e82323;
+  background-image: linear-gradient(135deg, #e82323 0%, #f66550 50%, #ffaa97 100%);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  animation: gradientShift 6s linear infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
