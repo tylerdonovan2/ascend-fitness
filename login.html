@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Ascend Fitness</title>
+  <link rel="stylesheet" href="styles/colors.css">
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+  <header class="flex-row">
+    <h1>Ascend: Fitness</h1>
+    <div id="account-button-container">
+      <a href="/"><button>Home</button></a>
+      <a href="/signup"><button class="attention">Signup</button></a>
+    </div>
+  </header>
+
+  <div class="centered-container">
+    <h1 class="title text-gradient">Login</h1>
+    <form action="/login" method="post" style="display:flex; flex-direction:column; align-items:center;">
+      <input type="email" name="email" placeholder="Email" required style="margin:10px; padding:10px; border-radius:5px;">
+      <input type="password" name="password" placeholder="Password" required style="margin:10px; padding:10px; border-radius:5px;">
+      <button type="submit" class="attention">Login</button>
+    </form>
+  </div>
+</body>
+</html>
