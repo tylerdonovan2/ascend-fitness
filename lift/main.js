@@ -1,7 +1,6 @@
-let workouts = [];
+let workouts = JSON.parse(localStorage.getItem("workouts")) || [];
 
 document.addEventListener("DOMContentLoaded", () => {
-    workouts = JSON.parse(localStorage.getItem("workouts")) || [];
     workouts.forEach(entry => {
       addWorkoutEntryToTable(entry);
     });
@@ -85,6 +84,10 @@ function addWorkoutEntryToTable(workoutEntry) {
     tableRow.value = workoutEntry.id;
 
     workoutTable.appendChild(tableRow);
+
+    tableRow.addEventListener("click", () => {
+        navigateToWorkoutEntry(workoutEntry.id);
+    })
 }
 
 function createElementWithText(tag, text) {
@@ -110,4 +113,8 @@ function formatDate(dateString) {
         : "th";
 
     return `${month} ${day}${suffix}, ${year}`;
-  }
+}
+
+function navigateToWorkoutEntry(workoutId){
+    window.location.href = "workout?workoutId=" + workoutId;
+}
