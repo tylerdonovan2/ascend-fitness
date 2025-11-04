@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const dateContainer = document.querySelector("#date-container")
     if(workoutEntry) {
-        dateContainer.innerHTML = workoutEntry.formattedDate;
+        dateContainer.innerHTML = workoutEntry.formattedDate + " • " + workoutEntry.muscleGroups.join(", ");
     }
 
     const backButton = document.querySelector("#back-button");

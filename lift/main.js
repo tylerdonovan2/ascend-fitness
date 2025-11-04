@@ -1,9 +1,7 @@
 let workouts = JSON.parse(localStorage.getItem("workouts")) || [];
 
 document.addEventListener("DOMContentLoaded", () => {
-    workouts.forEach(entry => {
-      addWorkoutEntryToTable(entry);
-    });
+    resetWorkoutEntryTable();
 
     const addWorkoutButton = document.querySelector("#add-button")
     const addWorkoutContainer = document.querySelector("body > div.workout-entry-container")
@@ -65,10 +63,28 @@ function createWorkoutEntry(date, muscleGroups){
         volume: 0,
         reps: 0,
     }
+
     workouts.push(workoutEntry);
+    sortWorkouts();
+
     localStorage.setItem("workouts", JSON.stringify(workouts));
 
     addWorkoutEntryToTable(workoutEntry);
+}
+
+function sortWorkouts(){
+    workouts.sort((a, b) => {
+      return new Date(b.date) - new Date(a.date);
+    });
+}
+
+function resetWorkoutEntryTable(){
+    const workoutTable = document.querySelector("body > div.centered-container > div > table > tbody");
+    workoutTable.innerHTML = "";
+
+    workouts.forEach(entry => {
+      addWorkoutEntryToTable(entry);
+    });
 }
 
 function addWorkoutEntryToTable(workoutEntry) {
