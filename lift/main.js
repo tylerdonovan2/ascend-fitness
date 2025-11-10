@@ -66,10 +66,8 @@ function createWorkoutEntry(date, muscleGroups){
 
     workouts.push(workoutEntry);
     sortWorkouts();
-
     localStorage.setItem("workouts", JSON.stringify(workouts));
-
-    addWorkoutEntryToTable(workoutEntry);
+    resetWorkoutEntryTable();
 }
 
 function sortWorkouts(){

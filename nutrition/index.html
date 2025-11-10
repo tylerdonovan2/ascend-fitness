@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ascend: fitness</title>
+    <link rel="stylesheet" href="../styles/colors.css">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="meal-entry-container hidden">
+        <div class="centered-container fill">
+            <div class="meal-entry-view">
+                <div class="meal-entry-exit-container">
+                    <button id="exit-meal-entry-view">x</button>
+                </div>
+                <div>
+                    <span>Meal</span>
+                    <div class="bubble-selector" id="mealGroupInput">
+                        <div class="bubble" data-value="Breakfast"><p>Breakfast</p></div>
+                        <div class="bubble" data-value="Lunch"><p>Lunch</p></div>
+                        <div class="bubble" data-value="Dinner"><p>Dinner</p></div>
+                        <div class="bubble" data-value="Snack"><p>Snack</p></div>
+                    </div>
+                </div>
+
+                <div>
+                    <span>Servings</span>
+                    <label>
+                        <input type="number" id="servings-input">
+                    </label>
+                </div>
+
+                <div class="divider"></div>
+
+                <div>
+                    <span>Search Food</span>
+                    <label>
+                        <input>
+                    </label>
+                </div>
+
+
+                <button type="submit" id="create-meal">Add Meal</button>
+                <div class="divider"></div>
+                <input type="file" id="barcodeInput" accept="image/*">
+                <button type="submit" id="scan-meal">Scan Label</button>
+            </div>
+        </div>
+    </div>
+    <header class="flex-row">
+        <h1>Ascend</h1>
+        <div id="navigation-button-container">
+            <button class="nav-button">Lifts</button>
+            <button class="nav-button">Nutrition</button>
+            <button class="nav-button">Progress</button>
+            <button class="nav-button">Explore</button>
+        </div>
+    </header>
+    <div class="centered-container">
+        <div class="content-container">
+            <div class="add-meal-container">
+                <button id="add-button">+</button>
+            </div>
+
+            <div class="table-container">
+                <div class="group-table">
+                    <h3>Breakfast</h3>
+                    <table class="meal-table">
+                        <thead class="meal-table-header">
+                            <tr>
+                                <td><h4>Name</h4></td>
+                                <td><h4>Servings</h4></td>
+                                <td><h4>Calories</h4></td>
+                            </tr>
+                        </thead>
+                        <tbody id="breakfast-table-body">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="group-table">
+                    <h3>Lunch</h3>
+                    <table class="meal-table">
+                        <thead class="meal-table-header">
+                            <tr>
+                                <td><h4>Name</h4></td>
+                                <td><h4>Servings</h4></td>
+                                <td><h4>Calories</h4></td>
+                            </tr>
+                        </thead>
+                        <tbody id="lunch-table-body">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="group-table">
+                    <h3>Dinner</h3>
+                    <table class="meal-table">
+                        <thead class="meal-table-header">
+                            <tr>
+                                <td><h4>Name</h4></td>
+                                <td><h4>Servings</h4></td>
+                                <td><h4>Calories</h4></td>
+                            </tr>
+                        </thead>
+                        <tbody id="dinner-table-body">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="group-table">
+                    <h3>Snack</h3>
+                    <table class="meal-table">
+                        <thead class="meal-table-header">
+                            <tr>
+                                <td><h4>Name</h4></td>
+                                <td><h4>Servings</h4></td>
+                                <td><h4>Calories</h4></td>
+                            </tr>
+                        </thead>
+                        <tbody id="snack-table-body">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="totals-container">
+                <div class="total-container">
+                    <h1 id="calorie-total"></h1>
+                    <h3>Calories</h3>
+                </div>
+                <div class="total-container">
+                    <h1 id="protein-total"></h1>
+                    <h3>Protein</h3>
+                </div>
+                <div class="total-container">
+                    <h1 id="carbohydrates-total"></h1>
+                    <h3>Carbohydrates</h3>
+                </div>
+                <div class="total-container">
+                    <h1 id="fat-total"></h1>
+                    <h3>Fat</h3>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

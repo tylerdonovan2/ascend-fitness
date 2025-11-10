@@ -1,0 +1,234 @@
+.meal-entry-container{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.meal-entry-view{
+    padding: 25px;
+    border-radius: 15px;
+    width: 40%;
+    background: var(--clr-surface-a10);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.meal-entry-view label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    color: var(--clr-light-a0);
+}
+
+.meal-entry-view input[type="date"]{
+    margin-top: 5px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--clr-surface-a20);
+    color: var(--clr-light-a0);
+    font-size: 1rem;
+}
+
+.bubble-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.bubble {
+    background-color: var(--clr-surface-a20);
+    border-radius: 20px;
+    padding: 8px 14px;
+    font-size: 0.95rem;
+    color: var(--clr-light-a0);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    border: 1px solid var(--clr-surface-a30);
+}
+
+.bubble:hover {
+    background-color: var(--clr-surface-a30);
+    border-color: var(--clr-primary-a30);
+    color: var(--clr-light-a0);
+}
+
+.bubble.selected {
+    background-color: var(--clr-primary-a10);
+    border-color: var(--clr-primary-a10);
+    color: var(--clr-light-a0);
+    transform: scale(1.05);
+}
+
+.bubble {
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+.bubble:active {
+    transform: scale(0.97);
+}
+
+.bubble > p{
+    margin: 0;
+}
+
+.meal-entry-view #create-meal {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.meal-entry-exit-container{
+    display: flex;
+    justify-content: flex-end;
+}
+
+#exit-meal-entry-view {
+    padding: 3px;
+    color: var(--clr-light-a0);
+    opacity: 60%;
+    background: none;
+    font-weight: normal;
+}
+
+.meal-entry-view select {
+  height: 100px;
+}
+
+.meal-entry-view button:hover {
+  background-color: var(--clr-surface-a50);
+}
+
+
+#navigation-button-container{
+    margin-left: auto;
+    display: flex;
+    justify-content: space-around;
+    gap: 25px;
+    padding: 25px 0 25px 0;
+}
+
+.nav-button{
+    width: 100%;
+    padding: 10px 40px 10px 40px;
+}
+
+.content-container{
+    width: 80%;
+}
+.add-meal-container{
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0 10px 10px;
+}
+
+.table-container{
+    width: 100%;
+    gap: 25px;
+    display: flex;
+    flex-direction: row;
+}
+
+.group-table{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.group-table > h3{
+    margin-left: 10px;
+}
+
+.meal-table{
+    width: 100%;
+    background-color: var(--clr-surface-a20);
+    border-radius: 15px;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+
+.meal-table tbody {
+    display: block;
+    height: 400px;
+    overflow-y: auto;
+}
+
+.meal-table thead,
+.meal-table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.meal-table tbody {
+    display: block;
+    height: fit-content;
+    overflow-y: auto;
+}
+
+td > h4{
+    margin: 0;
+    padding: 10px;
+    opacity: 60%;
+}
+
+tbody td{
+    margin: 0;
+    padding: 10px;
+    font-family: "Montserrat", sans-serif;
+    color: var(--clr-light-a0);
+    font-weight: bold;
+}
+
+.meal-table-header{
+    background-color: var(--clr-surface-a10);
+}
+.meal-table-body{
+    overflow-y: scroll;
+}
+.meal-table tbody tr:nth-child(even) {
+    background-color: var(--clr-surface-a30);
+}
+
+
+tbody tr{
+    cursor: pointer;
+    height: 40px
+}
+
+.meal-table tbody tr:hover{
+    background-color: var(--clr-surface-a40);
+}
+
+
+.totals-container{
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+.total-container{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    background-color: var(--clr-surface-a20);
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+}
+
+.total-container h1, .total-container h3{
+    margin: 0;
+}
