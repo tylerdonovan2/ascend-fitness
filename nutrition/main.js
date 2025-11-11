@@ -26,32 +26,24 @@ document.addEventListener("DOMContentLoaded", () => {
     addMealButton.addEventListener("click", () => {
         addMealContainer.classList.toggle("hidden")
     })
-    
+
     const exitMealEntryView = document.querySelector("#exit-meal-entry-view")
     exitMealEntryView.addEventListener("click", () => {
         resetMealEntryView();
-        addMealContainer.classList.toggle("hidden")
     })
-
-    function resetMealEntryView() {
-        dateInput.value = new Date().toISOString().split('T')[0];
-        bubbles.forEach(bubble => bubble.classList.remove("selected"));
-        muscleInput.value = "";
-    }
 
     const bubbles = document.querySelectorAll(".bubble");
     const mealInput = document.getElementById("mealGroupInput");
 
     bubbles.forEach(bubble => {
-      bubble.addEventListener("click", (e) => {
-        Array.from(document.querySelectorAll(".bubble.selected")).map(b => b.classList.toggle("selected"));
-        bubble.classList.toggle("selected");
-        mealInput.value = e.target.dataset.value;
-      });
+        bubble.addEventListener("click", (e) => {
+            Array.from(document.querySelectorAll(".bubble.selected")).map(b => b.classList.toggle("selected"));
+            bubble.classList.toggle("selected");
+            mealInput.value = bubble.dataset.value;
+        });
     });
 
     const servingsInput = document.getElementById("servings-input");
-
     const barcodeInput = document.getElementById("barcodeInput");
     const scanBarcodeButton = document.getElementById("scan-meal");
     scanBarcodeButton.addEventListener("click", async (e) => {
@@ -69,11 +61,58 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(`You scanned ${productName}`)
 
         createMealEntry(productData, mealInput.value, servingsInput.value);
+        resetMealEntryView()
     });
+
+
+    const searchButton = document.getElementById('search-button')
+    const searchSelect = document.querySelector("#search-select");
+    const foodSearch = document.getElementById('food-search')
+
+    searchButton.addEventListener('click', async () => {
+        let foodName = foodSearch.value.trim();
+
+        const topResults = await lookupProductByName(foodName);
+
+        if (topResults.length === 0) {
+            const option = document.createElement('option');
+
+            option.textContent = 'No results found.';
+            return;
+        }
+
+        searchSelect.innerHTML = '';
+        topResults.forEach((item, index) => {
+            const option = document.createElement('option');
+            option.value = item.barcode;
+            option.textContent = `${item.name} (Barcode: ${item.barcode})`;
+            searchSelect.appendChild(option);
+        });
+    });
+
+    const createMealButton = document.querySelector("#create-meal");
+    createMealButton.addEventListener("click", async () => {
+        const barcode = searchSelect.value
+        const productData = await lookupProductByBarcode(barcode);
+        console.log(productData);
+
+        const productName = productData.product.product_name;
+        console.log(`You logged ${productName}`)
+
+        createMealEntry(productData, mealInput.value, servingsInput.value);
+        resetMealEntryView()
+    })
+
+    function resetMealEntryView() {
+        addMealContainer.classList.toggle("hidden")
+        bubbles.forEach(bubble => bubble.classList.remove("selected"));
+        foodSearch.value = "";
+        servingsInput.value = 0;
+    }
 })
 
 
-function createMealEntry(productData, meal, servings){
+function createMealEntry(productData, meal, servings) {
     const mealEntry = {
         name: productData.product.product_name,
         image: productData.product.image_small_url,
@@ -85,13 +124,13 @@ function createMealEntry(productData, meal, servings){
         carbohydrates: productData.product.nutriments["carbohydrates"],
         fat: productData.product.nutriments["fat"],
     }
-    
+
     meals.push(mealEntry)
     localStorage.setItem("meals", JSON.stringify(meals))
     resetMealEntryTable();
 }
 
-function resetMealEntryTable(){
+function resetMealEntryTable() {
     Object.values(groupTables).forEach(tbody => {
         tbody.innerHTML = "";
     });
@@ -103,7 +142,7 @@ function resetMealEntryTable(){
     updateTotals();
 }
 
-function updateTotals(){
+function updateTotals() {
     const calorieTotal = document.querySelector("#calorie-total")
     const proteinTotal = document.querySelector("#protein-total")
     const fatTotal = document.querySelector("#fat-total")
@@ -151,8 +190,8 @@ async function uploadBarcodeImage(file) {
     formData.append("image", file);
 
     const res = await fetch("http://localhost:5000/scan_barcode", {
-    method: "POST",
-    body: formData
+        method: "POST",
+        body: formData
     });
 
     const data = await res.json();
@@ -168,3 +207,25 @@ async function lookupProductByBarcode(barcode) {
     const data = await res.json();
     return data;
 }
+
+async function lookupProductByName(foodName) {
+    try {
+        const response = await fetch(`https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(foodName)}&search_simple=1&action=process&json=1`);
+        const data = await response.json();
+
+        if (data.products && data.products.length > 0) {
+            return data.products.filter(product => product.product_name && product.product_name.trim() !== "").slice(0, 5).map(product => ({
+                name: product.product_name || "No name",
+                barcode: product.code || "No barcode"
+            }));
+        } else {
+            return []; // No products found
+        }
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        return [];
+    }
+}
+
+
+

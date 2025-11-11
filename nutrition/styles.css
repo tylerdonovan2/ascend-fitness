@@ -232,3 +232,7 @@ tbody tr{
 .total-container h1, .total-container h3{
     margin: 0;
 }
+
+#search-select{
+    height: 40px;
+}
