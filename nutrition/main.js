@@ -107,19 +107,20 @@ document.addEventListener("DOMContentLoaded", () => {
         addMealContainer.classList.toggle("hidden")
         bubbles.forEach(bubble => bubble.classList.remove("selected"));
         foodSearch.value = "";
-        servingsInput.value = 0;
+        servingsInput.value = 1;
     }
 })
 
 
 function createMealEntry(productData, meal, servings) {
     const mealEntry = {
+        id: crypto.randomUUID(),
         name: productData.product.product_name,
         image: productData.product.image_small_url,
         meal: meal,
         servings: servings,
-        total_calories: productData.product.nutriments["energy-kcal_serving"] * servings,
-        calories_per_serving: productData.product.nutriments["energy-kcal_serving"],
+        total_calories: productData.product.nutriments["energy-kcal"] * servings,
+        calories_per_serving: productData.product.nutriments["energy-kcal"],
         protein: productData.product.nutriments["proteins"],
         carbohydrates: productData.product.nutriments["carbohydrates"],
         fat: productData.product.nutriments["fat"],
@@ -212,11 +213,13 @@ async function lookupProductByName(foodName) {
     try {
         const response = await fetch(`https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(foodName)}&search_simple=1&action=process&json=1`);
         const data = await response.json();
+        console.log(data)
 
         if (data.products && data.products.length > 0) {
             return data.products.filter(product => product.product_name && product.product_name.trim() !== "").slice(0, 5).map(product => ({
                 name: product.product_name || "No name",
-                barcode: product.code || "No barcode"
+                barcode: product.code || "No barcode",
+                response: product,
             }));
         } else {
             return []; // No products found
