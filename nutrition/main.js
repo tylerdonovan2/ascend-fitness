@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     navButtons.forEach(button => {
         button.addEventListener("click", () => {
             const page = button.innerText.toLowerCase();
-            window.location.href = page;
+            window.location.href = "../" + page;
         });
     });
 
