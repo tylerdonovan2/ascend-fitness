@@ -170,7 +170,7 @@ function addMealEntryToTable(mealEntry) {
 
     tableRow.appendChild(createElementWithText("td", mealEntry.name));
     tableRow.appendChild(createElementWithText("td", mealEntry.servings));
-    tableRow.appendChild(createElementWithText("td", mealEntry.total_calories + "cal"));
+    tableRow.appendChild(createElementWithText("td", Math.round(mealEntry.total_calories) + "cal"));
 
     tableRow.value = mealEntry.id;
 
