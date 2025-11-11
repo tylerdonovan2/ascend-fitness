@@ -113,6 +113,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function createMealEntry(productData, meal, servings) {
+    if (productData == null || meal == null || servings == null) return;
+
     const mealEntry = {
         id: crypto.randomUUID(),
         name: productData.product.product_name,
@@ -172,6 +174,7 @@ function addMealEntryToTable(mealEntry) {
     tableRow.appendChild(createElementWithText("td", mealEntry.name));
     tableRow.appendChild(createElementWithText("td", mealEntry.servings));
     tableRow.appendChild(createElementWithText("td", Math.round(mealEntry.total_calories) + "cal"));
+    // tableRow.appendChild(createElementWithText("button", "x"));
 
     tableRow.value = mealEntry.id;
 
