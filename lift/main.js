@@ -1,6 +1,16 @@
 let workouts = JSON.parse(localStorage.getItem("workouts")) || [];
 
 document.addEventListener("DOMContentLoaded", () => {
+    const navButtons = document.querySelectorAll("#navigation-button-container .nav-button");
+
+    navButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const page = button.innerText.toLowerCase();
+            window.location.href = page;
+        });
+    });
+
+
     resetWorkoutEntryTable();
 
     const addWorkoutButton = document.querySelector("#add-button")

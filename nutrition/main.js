@@ -3,6 +3,15 @@ let meals = JSON.parse(localStorage.getItem("meals")) || [];
 
 let groupTables = {}
 document.addEventListener("DOMContentLoaded", () => {
+    const navButtons = document.querySelectorAll("#navigation-button-container .nav-button");
+
+    navButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const page = button.innerText.toLowerCase();
+            window.location.href = page;
+        });
+    });
+
     groupTables = {
         "Breakfast": document.querySelector("#breakfast-table-body"),
         "Lunch": document.querySelector("#lunch-table-body"),
