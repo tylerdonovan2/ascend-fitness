@@ -1,27 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Login - Ascend Fitness</title>
-  <link rel="stylesheet" href="styles/colors.css">
-  <link rel="stylesheet" href="styles/styles.css">
+    <meta charset="UTF-8">
+    <title>Login - Ascend Fitness</title>
+    <link rel="stylesheet" href="styles/colors.css">
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-  <header class="flex-row">
+
+<header class="flex-row">
     <h1>Ascend: Fitness</h1>
     <div id="account-button-container">
-      <a href="/"><button>Home</button></a>
-      <a href="/signup"><button class="attention">Signup</button></a>
+        <a href="/"><button>Home</button></a>
+        <a href="/signup"><button class="attention">Signup</button></a>
     </div>
-  </header>
+</header>
 
-  <div class="centered-container">
+<div class="centered-container">
     <h1 class="title text-gradient">Login</h1>
-    <form action="/login" method="post" style="display:flex; flex-direction:column; align-items:center;">
-      <input type="email" name="email" placeholder="Email" required style="margin:10px; padding:10px; border-radius:5px;">
-      <input type="password" name="password" placeholder="Password" required style="margin:10px; padding:10px; border-radius:5px;">
-      <button type="submit" class="attention">Login</button>
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div style="color:red; margin:10px; font-weight:bold;">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form action="/do_login" method="post" style="display:flex; flex-direction:column; align-items:center;">
+        <input type="email" name="email" placeholder="Email" required style="margin:10px; padding:10px; width:250px; border-radius:5px;">
+        <input type="password" name="password" placeholder="Password" required style="margin:10px; padding:10px; width:250px; border-radius:5px;">
+
+        <button type="submit" class="attention" style="padding:10px 40px; margin-top:10px;">Login</button>
     </form>
-  </div>
+</div>
+
 </body>
 </html>

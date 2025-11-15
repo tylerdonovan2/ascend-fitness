@@ -1,28 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Signup - Ascend Fitness</title>
-  <link rel="stylesheet" href="styles/colors.css">
-  <link rel="stylesheet" href="styles/styles.css">
+    <meta charset="UTF-8">
+    <title>Signup - Ascend Fitness</title>
+    <link rel="stylesheet" href="styles/colors.css">
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-  <header class="flex-row">
+
+<header class="flex-row">
     <h1>Ascend: Fitness</h1>
     <div id="account-button-container">
-      <a href="/"><button>Home</button></a>
-      <a href="/login"><button>Login</button></a>
+        <a href="/"><button>Home</button></a>
+        <a href="/login"><button class="attention">Login</button></a>
     </div>
-  </header>
+</header>
 
-  <div class="centered-container">
+<div class="centered-container">
     <h1 class="title text-gradient">Signup</h1>
-    <form action="/signup" method="post" style="display:flex; flex-direction:column; align-items:center;">
-      <input type="text" name="username" placeholder="Username" required style="margin:10px; padding:10px; border-radius:5px;">
-      <input type="email" name="email" placeholder="Email" required style="margin:10px; padding:10px; border-radius:5px;">
-      <input type="password" name="password" placeholder="Password" required style="margin:10px; padding:10px; border-radius:5px;">
-      <button type="submit" class="attention">Sign Up</button>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div style="color:red; margin:10px; font-weight:bold;">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form action="/do_signup" method="post" style="display:flex; flex-direction:column; align-items:center;">
+        <input type="text" name="username" placeholder="Username" required style="margin:10px; padding:10px; width:250px; border-radius:5px;">
+        <input type="email" name="email" placeholder="Email" required style="margin:10px; padding:10px; width:250px; border-radius:5px;">
+        <input type="password" name="password" placeholder="Password" required style="margin:10px; padding:10px; width:250px; border-radius:5px;">
+
+        <button type="submit" class="attention" style="padding:10px 40px; margin-top:10px;">Sign Up</button>
     </form>
-  </div>
+</div>
+
 </body>
 </html>
