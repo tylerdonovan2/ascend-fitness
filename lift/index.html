@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ascend: fitness</title>
+    <link rel="stylesheet" href="../styles/colors.css">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="workout-entry-container hidden">
+        <div class="centered-container fill">
+            <div class="workout-entry-view">
+                <div class="workout-entry-exit-container">
+                    <button id="exit-workout-entry-view">x</button>
+                </div>
+                <label>
+                    <span>Date</span>
+                    <input type="date" name="date" required/>
+                </label>
+
+                <div>
+                    <span>Muscle Group(s)</span>
+                    <div class="bubble-selector" id="muscleGroupsInput">
+                        <div class="bubble" data-value="Biceps"><p>Biceps</p></div>
+                        <div class="bubble" data-value="Triceps"><p>Triceps</p></div>
+                        <div class="bubble" data-value="Back"><p>Back</p></div>
+                        <div class="bubble" data-value="Legs"><p>Legs</p></div>
+                        <div class="bubble" data-value="Shoulders"><p>Shoulders</p></div>
+                        <div class="bubble" data-value="Chest"><p>Chest</p></div>
+                        <div class="bubble" data-value="Core"><p>Core</p></div>
+                        <div class="bubble" data-value="Cardio"><p>Cardio</p></div>
+                    </div>
+                </div>
+
+                <button type="submit" id="create-workout">Add Workout</button>
+            </div>
+        </div>
+    </div>
+    <header class="flex-row">
+        <h1>Ascend</h1>
+        <div id="navigation-button-container">
+            <button class="nav-button">Lifts</button>
+            <button class="nav-button">Nutrition</button>
+            <button class="nav-button">Progress</button>
+            <button class="nav-button">Explore</button>
+        </div>
+    </header>
+    <div class="centered-container">
+        <div class="content-container">
+            <div class="add-workout-container">
+                <button id="add-button">+</button>
+            </div>
+
+            <table class="workout-table">
+                <thead class="workout-table-header">
+                    <tr>
+                        <td><h4>Date</h4></td>
+                        <td><h4>Group</h4></td>
+                        <td><h4>Volume</h4></td>
+                        <td><h4>Reps</h4></td>
+                    </tr>
+                </thead>
+                <tbody class="workout-table-body">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
