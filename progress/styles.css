@@ -1,13 +1,12 @@
-.meal-entry-container{
+.stat-entry-container{
     width: 100%;
     height: 100%;
     position: absolute;
     display: flex;
     background: rgba(0, 0, 0, 0.8);
-    z-index: 99;
 }
 
-.meal-entry-view{
+.stat-entry-view{
     padding: 25px;
     border-radius: 15px;
     width: 40%;
@@ -17,14 +16,14 @@
     gap: 15px;
 }
 
-.meal-entry-view label {
+.stat-entry-view label {
     display: flex;
     flex-direction: column;
     font-weight: 500;
     color: var(--clr-light-a0);
 }
 
-.meal-entry-view input[type="date"]{
+.stat-entry-view input[type="date"]{
     margin-top: 5px;
     padding: 8px 10px;
     border-radius: 8px;
@@ -77,7 +76,7 @@
     margin: 0;
 }
 
-.meal-entry-view #create-meal {
+.stat-entry-view #create-stat {
     padding: 10px;
     border: none;
     border-radius: 8px;
@@ -85,12 +84,12 @@
     cursor: pointer;
 }
 
-.meal-entry-exit-container{
+.stat-entry-exit-container{
     display: flex;
     justify-content: flex-end;
 }
 
-#exit-meal-entry-view {
+#exit-stat-entry-view {
     padding: 3px;
     color: var(--clr-light-a0);
     opacity: 60%;
@@ -98,11 +97,11 @@
     font-weight: normal;
 }
 
-.meal-entry-view select {
+.stat-entry-view select {
   height: 100px;
 }
 
-.meal-entry-view button:hover {
+.stat-entry-view button:hover {
   background-color: var(--clr-surface-a50);
 }
 
@@ -123,56 +122,23 @@
 .content-container{
     width: 80%;
 }
-.add-meal-container{
+.update-stat-container{
     display: flex;
     justify-content: flex-end;
     padding: 10px 0 10px 10px;
 }
-
-.table-container{
-    width: 100%;
-    gap: 25px;
+.stat-chart-container{
     display: flex;
-    flex-direction: row;
-}
-
-.group-table{
-    width: 100%;
-    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-}
-
-.group-table > h3{
-    margin-left: 10px;
-}
-
-.meal-table{
-    width: 100%;
-    background-color: var(--clr-surface-a20);
+    gap: 25px;
     border-radius: 15px;
-    border-collapse: collapse;
-    overflow: hidden;
+    background-color: var(--clr-surface-a20);
+    padding: 25px;
 }
 
 
-.meal-table tbody {
-    display: block;
-    height: 400px;
-    overflow-y: auto;
-}
-
-.meal-table thead,
-.meal-table tbody tr {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-}
-
-.meal-table tbody {
-    display: block;
-    height: fit-content;
-    overflow-y: auto;
-}
 
 td > h4{
     margin: 0;
@@ -188,57 +154,20 @@ tbody td{
     font-weight: bold;
 }
 
-.meal-table-header{
+.stat-table-header{
     background-color: var(--clr-surface-a10);
 }
-.meal-table-body{
+.stat-table-body{
     overflow-y: scroll;
 }
-.meal-table tbody tr:nth-child(even) {
+.stat-table tbody tr:nth-child(even) {
     background-color: var(--clr-surface-a30);
 }
 
-
 tbody tr{
     cursor: pointer;
-    height: 40px
 }
 
-.meal-table tbody tr:hover{
+.stat-table tbody tr:hover{
     background-color: var(--clr-surface-a40);
-}
-
-
-.totals-container{
-    display: flex;
-    flex-direction: row;
-    gap: 25px;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 25px;
-}
-
-.total-container{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    background-color: var(--clr-surface-a20);
-    border-radius: 15px;
-    padding: 40px;
-    text-align: center;
-}
-
-.total-container h1, .total-container h3{
-    margin: 0;
-}
-
-#search-select{
-    height: 40px;
-}
-
-td > button{
-    padding: 5px;
-    background: none;
 }

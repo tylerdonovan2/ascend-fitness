@@ -3,6 +3,7 @@ const urlParams = new URLSearchParams(queryString);
 const workoutId = urlParams.get('workoutId');
 
 let workouts = JSON.parse(localStorage.getItem("workouts")) || [];
+let exercises = JSON.parse(localStorage.getItem(workoutId)) || [];
 document.addEventListener("DOMContentLoaded", () => {
     let workoutEntry;
     workouts.forEach(entry => {
@@ -22,3 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = ".."
     });
 })
+
+function createExerciseEntry(){
+
+}
