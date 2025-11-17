@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ascend: fitness</title>
+    <link rel="stylesheet" href="../styles/colors.css">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="stat-entry-container hidden">
+        <div class="centered-container fill">
+            <div class="stat-entry-view">
+                <div class="stat-entry-exit-container">
+                    <button id="exit-stat-entry-view">x</button>
+                </div>
+                <label>
+                    <span>Bench</span>
+                    <input type="number" id="bench-input"/>
+                </label>
+                <label>
+                    <span>Squat</span>
+                    <input type="number" id="squat-input"/>
+                </label>
+                <label>
+                    <span>Deadlift</span>
+                    <input type="number" id="deadlift-input"/>
+                </label>
+                <label>
+                    <span>Bodyweight</span>
+                    <input type="number" id="bodyweight-input"/>
+                </label>
+
+
+                <button type="submit" id="update-stat">Update Stats</button>
+            </div>
+        </div>
+    </div>
+    <header class="flex-row">
+        <h1>Ascend</h1>
+        <div id="navigation-button-container">
+            <button class="nav-button">Lifts</button>
+            <button class="nav-button">Nutrition</button>
+            <button class="nav-button">Progress</button>
+        </div>
+    </header>
+    <div class="centered-container">
+        <div class="content-container">
+            <div class="update-stat-container">
+                <button id="update-button">Log</button>
+            </div>
+            <div class="stat-chart-container">
+                <canvas id="progressChart" style="width:100%;max-width:700px"></canvas>
+                <div>
+                    <div class="bubble-selector" id="progressInput">
+                        <div class="bubble selected" data-value="Bench"><p>Bench</p></div>
+                        <div class="bubble" data-value="Squat"><p>Squat</p></div>
+                        <div class="bubble" data-value="Deadlift"><p>Deadlift</p></div>
+                        <div class="bubble" data-value="Weight"><p>Weight</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+
+    <script src="main.js"></script>
+</body>
+</html>
