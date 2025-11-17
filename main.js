@@ -3,4 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
     startButton.addEventListener("click", () => {
         window.location.href = "lift"
     })
+
+    const navButtons =
 })

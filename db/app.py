@@ -1,6 +1,10 @@
-from flask import Flask, render_template_string, request, redirect, flash, session, send_from_directory
+from flask import Flask, render_template_string, request, redirect, flash, session, send_from_directory, jsonify
 import sqlite3, re, os
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_cors import CORS
+from PIL import Image
+import io
+from pyzbar.pyzbar import decode
 
 app = Flask(__name__)
 app.secret_key = "C8A0E2F6792B4A79D91A23FDD98C"
@@ -96,6 +100,22 @@ def do_login():
     else:
         flash("Invalid email or password.")
         return redirect("/login")
+
+@app.route('/scan_barcode', methods=['POST'])
+def scan_barcode():
+    if 'image' not in request.files:
+        return jsonify({"error": "No image uploaded"}), 400
+
+    file = request.files['image']
+    image = Image.open(io.BytesIO(file.read()))
+
+    results = decode(image)
+    if not results:
+        return jsonify({"success": False, "data": None})
+
+    decoded_data = results[0].data.decode("utf-8")
+
+    return jsonify({"success": True, "data": decoded_data})
 
 if __name__ == "__main__":
     app.run(debug=True)
