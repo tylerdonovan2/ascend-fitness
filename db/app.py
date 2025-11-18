@@ -8,6 +8,8 @@ from pyzbar.pyzbar import decode
 
 app = Flask(__name__)
 app.secret_key = "C8A0E2F6792B4A79D91A23FDD98C"
+CORS(app)
+
 DB_PATH = os.path.join(os.path.dirname(__file__), "database.db")
 
 def get_db():
@@ -71,7 +73,7 @@ def do_signup():
 
     if not valid_password(pw):
         flash("Password must be 8+ chars, include upper/lowercase, number, and symbol.")
-        return redirect("/signup")
+        return redirect("https://tylerdonovan2.github.io/ascend-fitness/signup/")
 
     conn = get_db()
     try:
@@ -81,10 +83,10 @@ def do_signup():
         )
         conn.commit()
         flash("Account created successfully!")
-        return redirect("/login")
+        return redirect("https://tylerdonovan2.github.io/ascend-fitness/login/")
     except sqlite3.IntegrityError:
         flash("Email already exists.")
-        return redirect("/signup")
+        return redirect("https://tylerdonovan2.github.io/ascend-fitness/signup/")
 
 @app.route("/do_login", methods=["POST"])
 def do_login():
@@ -96,10 +98,10 @@ def do_login():
     if user and check_password_hash(user["password_hash"], pw):
         session["user"] = user["username"]
         flash("Login successful!")
-        return redirect("/")
+        return redirect("https://tylerdonovan2.github.io/ascend-fitness/")
     else:
         flash("Invalid email or password.")
-        return redirect("/login")
+        return redirect("https://tylerdonovan2.github.io/ascend-fitness/login/")
 
 @app.route('/scan_barcode', methods=['POST'])
 def scan_barcode():
