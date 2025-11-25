@@ -4,6 +4,7 @@
     position: absolute;
     display: flex;
     background: rgba(0, 0, 0, 0.8);
+    z-index: 99;
 }
 
 .workout-entry-view{
@@ -129,7 +130,6 @@
 }
 .workout-table{
     width: 100%;
-    height: 600px;
     background-color: var(--clr-surface-a20);
     border-radius: 15px;
     border-collapse: collapse;
@@ -163,6 +163,7 @@ tbody td{
 
 tbody tr{
     cursor: pointer;
+    height: 80px
 }
 
 .workout-table tbody tr:hover{

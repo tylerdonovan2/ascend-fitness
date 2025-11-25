@@ -10,6 +10,7 @@
     background: radial-gradient(circle at top, rgba(0,0,0,0.85), rgba(0,0,0,0.95));
     backdrop-filter: blur(4px);
     z-index: 99;
+    z-index: 99;
 }
 
 .stat-entry-view {

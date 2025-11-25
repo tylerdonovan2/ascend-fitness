@@ -2,6 +2,7 @@ let meals = JSON.parse(localStorage.getItem("meals")) || [];
 
 
 let groupTables = {}
+let selectedMeal;
 document.addEventListener("DOMContentLoaded", () => {
     const navButtons = document.querySelectorAll("#navigation-button-container .nav-button");
 
@@ -72,6 +73,11 @@ document.addEventListener("DOMContentLoaded", () => {
     searchButton.addEventListener('click', async () => {
         let foodName = foodSearch.value.trim();
 
+        searchSelect.innerHTML = '';
+        const loadingOption = document.createElement('option');
+        loadingOption.textContent = 'Loading...';
+        searchSelect.appendChild(loadingOption);
+
         const topResults = await lookupProductByName(foodName);
 
         if (topResults.length === 0) {
@@ -103,6 +109,18 @@ document.addEventListener("DOMContentLoaded", () => {
         resetMealEntryView()
     })
 
+    const exitMealDetailView = document.querySelector("#exit-meal-view")
+    const mealDetailView = document.querySelector("#meal-view-container")
+    exitMealDetailView.addEventListener("click", () => {
+        mealDetailView.classList.add("hidden")
+    })
+
+    const deleteMealEntry = document.querySelector("#delete-entry")
+    deleteMealEntry.addEventListener("click", () => {
+        deleteMealEntryById(selectedMeal.id)
+        mealDetailView.classList.add("hidden")
+    })
+
     function resetMealEntryView() {
         addMealContainer.classList.add("hidden")
 
@@ -127,7 +145,7 @@ function createMealEntry(productData, meal, servings) {
         id: crypto.randomUUID(),
         barcode: productData.code,
         name: productData.product.product_name,
-        image: buildImageUrl(productData.code, productData.product.selected_images.packaging.display.en, "front_en"),
+        // image: buildImageUrl(productData.code, productData.product.selected_images.packaging.display.en, "front_en"),
         meal: meal,
         servings: servings,
         total_calories: productData.product.nutriments["energy-kcal"] * servings,
@@ -250,6 +268,10 @@ function addMealEntryToTable(mealEntry) {
 
     tableRow.value = mealEntry.id;
 
+    tableRow.addEventListener("click", () => {
+        showMealDetails(mealEntry)
+    })
+
     groupTables[mealEntry.meal].appendChild(tableRow);
 }
 
@@ -303,8 +325,41 @@ async function lookupProductByName(foodName) {
     }
 }
 
+const mealDetailName = document.querySelector("#meal-name-view")
+const mealDetailProtein = document.querySelector("#protein-view")
+const mealDetailCarbohyrdates = document.querySelector("#carb-view")
+const mealDetailFat = document.querySelector("#fat-view")
+const mealDetailCalories = document.querySelector("#calorie-view")
+const mealDetailServings = document.querySelector("#serving-view")
+
+function showMealDetails(entry){
+    let mealDetailView = document.querySelector("#meal-view-container")
+    mealDetailView.classList.remove("hidden")
+
+    selectedMeal = entry;
+
+    let servings = +entry.servings;
+
+    mealDetailServings.textContent = entry.servings;
+    mealDetailName.textContent = entry.name;
+    mealDetailProtein.textContent = Math.round(entry.protein * servings);
+    mealDetailCarbohyrdates.textContent = Math.round(entry.carbohydrates * servings);
+    mealDetailFat.textContent = Math.round(entry.fat * servings);
+    mealDetailCalories.textContent = Math.round(entry.total_calories);
+}
+
+
 
 function popMeal(){
     meals.pop()
     localStorage.setItem("meals", JSON.stringify(meals))
+}
+
+
+function deleteMealEntryById(mealId){
+    meals = meals.filter(meal => meal.id !== mealId)
+
+    localStorage.setItem("meals", JSON.stringify(meals));
+
+    resetMealEntryTable();
 }
