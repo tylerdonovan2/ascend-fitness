@@ -72,8 +72,7 @@ def do_signup():
     pw = request.form["password"]
 
     if not valid_password(pw):
-        flash("Password must be 8+ chars, include upper/lowercase, number, and symbol.")
-        return redirect("https://tylerdonovan2.github.io/ascend-fitness/signup/")
+        return redirect("https://tylerdonovan2.github.io/ascend-fitness/signup?error=Password%20must%20be%208%2B%20chars%2C%20include%20upper%2Flowercase%2C%20number%2C%20and%20symbol.")
 
     conn = get_db()
     try:
@@ -85,8 +84,7 @@ def do_signup():
         flash("Account created successfully!")
         return redirect("https://tylerdonovan2.github.io/ascend-fitness/login/")
     except sqlite3.IntegrityError:
-        flash("Email already exists.")
-        return redirect("https://tylerdonovan2.github.io/ascend-fitness/signup/")
+        return redirect("https://tylerdonovan2.github.io/ascend-fitness/signup?error=Email%20already%20exists.")
 
 @app.route("/do_login", methods=["POST"])
 def do_login():
@@ -100,8 +98,7 @@ def do_login():
         flash("Login successful!")
         return redirect("https://tylerdonovan2.github.io/ascend-fitness/")
     else:
-        flash("Invalid email or password.")
-        return redirect("https://tylerdonovan2.github.io/ascend-fitness/login/")
+        return redirect("https://tylerdonovan2.github.io/ascend-fitness/login?error=Invalid%20email%20or%20password.")
 
 @app.route('/scan_barcode', methods=['POST'])
 def scan_barcode():

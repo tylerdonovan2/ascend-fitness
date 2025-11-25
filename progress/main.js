@@ -62,10 +62,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const logButton = document.querySelector("#update-button")
     const logView = document.querySelector("body > div.stat-entry-container.hidden")
     function resetInputs(){
-        benchInput.value = dataKeys["Bench"][dataKeys["Bench"].length - 1].y;
-        deadliftInput.value = dataKeys["Deadlift"][dataKeys["Deadlift"].length - 1].y;
-        weightInput.value = dataKeys["Weight"][dataKeys["Weight"].length - 1].y;
-        squatInput.value = dataKeys["Squat"][dataKeys["Squat"].length - 1].y;
+        benchInput.value = dataKeys["Bench"].length > 0 ? dataKeys["Bench"][dataKeys["Bench"].length - 1].y : 0;
+        deadliftInput.value = dataKeys["Deadlift"].length > 0 ? dataKeys["Deadlift"][dataKeys["Deadlift"].length - 1].y : 0;
+        weightInput.value = dataKeys["Weight"].length > 0 ? dataKeys["Weight"][dataKeys["Weight"].length - 1].y : 0;
+        squatInput.value = dataKeys["Squat"].length > 0 ? dataKeys["Squat"][dataKeys["Squat"].length - 1].y : 0;
     }
 
     logButton.addEventListener("click", () => {
