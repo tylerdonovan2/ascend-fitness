@@ -91,8 +91,25 @@ function resetWorkoutEntryTable(){
     workoutTable.innerHTML = "";
 
     workouts.forEach(entry => {
-      addWorkoutEntryToTable(entry);
+        updateTotals(entry)
+        addWorkoutEntryToTable(entry);
     });
+}
+
+function updateTotals(entry){
+    let exercises = JSON.parse(localStorage.getItem(entry.id)) || []
+
+    let totalReps = 0
+    let totalVolume = 0
+    exercises.forEach(
+        exercise => {
+            totalReps = totalReps + exercise.totalReps
+            totalVolume = totalVolume + exercise.volume
+        }
+    )
+
+    entry.reps = totalReps;
+    entry.volume = totalVolume
 }
 
 function addWorkoutEntryToTable(workoutEntry) {

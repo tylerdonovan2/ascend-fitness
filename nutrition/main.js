@@ -141,17 +141,20 @@ function createMealEntry(productData, meal, servings) {
     console.log(productData.product.images)
     console.log(productData.product.selected_images)
 
+    let carbohydrates = productData.product.nutriments["carbohydrates"]
+
     const mealEntry = {
         id: crypto.randomUUID(),
         barcode: productData.code,
         name: productData.product.product_name,
-        // image: buildImageUrl(productData.code, productData.product.selected_images.packaging.display.en, "front_en"),
+        front_image: productData.product.image_url,
+        nutrition_image: productData.product.image_nutrition_url,
         meal: meal,
         servings: servings,
         total_calories: productData.product.nutriments["energy-kcal"] * servings,
         calories_per_serving: productData.product.nutriments["energy-kcal"],
         protein: productData.product.nutriments["proteins"],
-        carbohydrates: productData.product.nutriments["carbohydrates"],
+        carbohydrates: carbohydrates ? carbohydrates : productData.product.nutriments["carbohydrates-total"],
         fat: productData.product.nutriments["fat"],
     }
 
@@ -160,69 +163,6 @@ function createMealEntry(productData, meal, servings) {
     resetMealEntryTable();
 }
 
-function buildImageUrl(barcode, imagesData, imageKey){
-        // ---- Step 1: Normalize barcode and compute folder path ----
-    let bc = String(barcode);
-
-    if (!/^\d+$/.test(bc)) {
-        throw new Error("Barcode must contain only digits");
-    }
-
-    // Pad to 13 digits
-    bc = bc.padStart(13, "0");
-
-    // Split into folder parts
-    const match = bc.match(/^(...)(...)(...)(.*)$/);
-    if (!match) {
-        throw new Error("Failed to split barcode");
-    }
-
-    const [, p1, p2, p3, p4] = match;
-    const folderUrl = `https://images.openfoodfacts.org/images/products/${p1}/${p2}/${p3}/${p4}`;
-
-    // ---- Step 2: Validate imageKey exists ----
-    const imageInfo = imagesData[imageKey];
-    if (!imageInfo) {
-        throw new Error(`Image key "${imageKey}" not found in images data`);
-    }
-
-    // ---- Step 3: Determine if raw or selected image ----
-    const sizes = imageInfo.sizes ? Object.keys(imageInfo.sizes) : [];
-
-    if (sizes.length === 0) {
-        throw new Error(`Image "${imageKey}" has no size information`);
-    }
-
-    let resolution = sizes[sizes.length - 1];
-
-
-    const isRawImage = /^\d+$/.test(imageKey);
-
-    let filename = "";
-
-    if (isRawImage) {
-        // ---- RAW IMAGE FILENAME ----
-        // For raw images, key is the numeric id
-        if (resolution === "full") {
-            filename = `${imageKey}.jpg`;
-        } else {
-            filename = `${imageKey}.${resolution}.jpg`;
-        }
-    } else {
-        // ---- SELECTED IMAGE FILENAME (front_fr, ingredients_en, etc.) ----
-        const { rev } = imageInfo;
-
-        if (!rev) {
-            throw new Error(`Selected image "${imageKey}" has no revision number`);
-        }
-
-        // Required format: <imageKey>.<rev>.<resolution>.jpg
-        filename = `${imageKey}.${rev}.${resolution}.jpg`;
-    }
-
-    // ---- Step 4: Return full URL ----
-    return `${folderUrl}/${filename}`;
-}
 
 function resetMealEntryTable() {
     Object.values(groupTables).forEach(tbody => {
@@ -296,7 +236,7 @@ async function uploadBarcodeImage(file) {
 
 async function lookupProductByBarcode(barcode) {
 
-    const res = await fetch(`https://world.openfoodfacts.net/api/v2/product/${barcode}?fields=product_name,nutriscore_data,nutriments,nutrition_grades,images,selected_images`, {
+    const res = await fetch(`https://world.openfoodfacts.org/api/v2/product/${barcode}.json`, {
         method: "GET",
     });
 
@@ -311,7 +251,7 @@ async function lookupProductByName(foodName) {
         console.log(data)
 
         if (data.products && data.products.length > 0) {
-            return data.products.filter(product => product.product_name && product.product_name.trim() !== "").slice(0, 5).map(product => ({
+            return data.products.filter(product => product.product_name && product.product_name.trim() !== "").slice(0, 10).map(product => ({
                 name: product.product_name || "No name",
                 barcode: product.code || "No barcode",
                 response: product,
@@ -331,6 +271,7 @@ const mealDetailCarbohyrdates = document.querySelector("#carb-view")
 const mealDetailFat = document.querySelector("#fat-view")
 const mealDetailCalories = document.querySelector("#calorie-view")
 const mealDetailServings = document.querySelector("#serving-view")
+const mealDetailImage = document.querySelector("#meal-view-container > div > div > div:nth-child(2) > img")
 
 function showMealDetails(entry){
     let mealDetailView = document.querySelector("#meal-view-container")
@@ -346,6 +287,7 @@ function showMealDetails(entry){
     mealDetailCarbohyrdates.textContent = Math.round(entry.carbohydrates * servings);
     mealDetailFat.textContent = Math.round(entry.fat * servings);
     mealDetailCalories.textContent = Math.round(entry.total_calories);
+    mealDetailImage.src = entry.front_image
 }
 
 
