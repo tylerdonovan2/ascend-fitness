@@ -9,7 +9,9 @@
 <body>
 
 <header class="flex-row">
-    <h1>Ascend: Fitness</h1>
+    <div class="flex-row">
+        <img src="../logo.png" class="logo-mark" alt="Ascend Logo">
+    </div>
     <div id="account-button-container">
         <a href="../"><button>Home</button></a>
         <a href="../login"><button class="attention">Login</button></a>
@@ -18,14 +20,6 @@
 
 <div class="centered-container">
     <h1 class="title text-gradient">Signup</h1>
-
-<!--    {% with messages = get_flashed_messages() %}-->
-<!--        {% if messages %}-->
-<!--            <div style="color:red; margin:10px; font-weight:bold;">-->
-<!--                {{ messages[0] }}-->
-<!--            </div>-->
-<!--        {% endif %}-->
-<!--    {% endwith %}-->
 
     <form action="http://127.0.0.1:5000/do_signup" method="post" style="display:flex; flex-direction:column; align-items:center;">
         <input type="text" name="username" placeholder="Username" required style="margin:10px; padding:10px; width:250px; border-radius:5px;">
