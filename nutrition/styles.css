@@ -1,20 +1,30 @@
-.meal-entry-container{
+.meal-entry-container {
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
+    inset: 0;
     display: flex;
-    background: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+
+    background: radial-gradient(circle at top, rgba(0,0,0,0.85), rgba(0,0,0,0.95));
+    backdrop-filter: blur(4px);
     z-index: 99;
 }
 
-.meal-entry-view{
+.meal-entry-view {
     padding: 25px;
-    border-radius: 15px;
-    width: 40%;
-    background: var(--clr-surface-a10);
+    border-radius: 20px;
+    width: min(480px, 90%);
+    background: linear-gradient(
+        135deg,
+        var(--clr-surface-a10),
+        var(--clr-surface-tonal-a20)
+    );
     display: flex;
     flex-direction: column;
     gap: 15px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
 }
 
 .meal-entry-view label {
@@ -24,16 +34,17 @@
     color: var(--clr-light-a0);
 }
 
-.meal-entry-view input[type="date"]{
+.meal-entry-view input[type="date"] {
     margin-top: 5px;
     padding: 8px 10px;
     border-radius: 8px;
-    border: none;
+    border: 1px solid var(--clr-surface-a30);
     background-color: var(--clr-surface-a20);
     color: var(--clr-light-a0);
     font-size: 1rem;
 }
 
+/* Bubble selector (Breakfast/Lunch/etc.) */
 .bubble-selector {
     display: flex;
     flex-wrap: wrap;
@@ -43,122 +54,125 @@
 
 .bubble {
     background-color: var(--clr-surface-a20);
-    border-radius: 20px;
+    border-radius: 999px;
     padding: 8px 14px;
     font-size: 0.95rem;
     color: var(--clr-light-a0);
     cursor: pointer;
-    transition: all 0.2s ease;
     user-select: none;
     border: 1px solid var(--clr-surface-a30);
+
+    transition:
+      background-color 0.2s ease,
+      transform 0.15s ease,
+      box-shadow 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
 }
 
 .bubble:hover {
     background-color: var(--clr-surface-a30);
     border-color: var(--clr-primary-a30);
-    color: var(--clr-light-a0);
 }
 
 .bubble.selected {
-    background-color: var(--clr-primary-a10);
-    border-color: var(--clr-primary-a10);
+    background-image: linear-gradient(
+        135deg,
+        var(--clr-primary-a10),
+        var(--clr-primary-a30)
+    );
+    border-color: var(--clr-primary-a30);
     color: var(--clr-light-a0);
-    transform: scale(1.05);
+    transform: scale(1.04);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.7);
 }
 
-.bubble {
-    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
-}
 .bubble:active {
     transform: scale(0.97);
 }
 
-.bubble > p{
+.bubble > p {
     margin: 0;
 }
 
-.meal-entry-view #create-meal {
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.meal-entry-exit-container{
+.meal-entry-exit-container {
     display: flex;
     justify-content: flex-end;
 }
 
-#exit-meal-entry-view, #exit-meal-view {
-    padding: 3px;
+#exit-meal-entry-view {
+    padding: 3px 6px;
     color: var(--clr-light-a0);
-    opacity: 60%;
+    opacity: 0.6;
     background: none;
+    border: none;
     font-weight: normal;
+    cursor: pointer;
 }
 
 .meal-entry-view select {
-  height: 100px;
+    height: 100px;
+    border-radius: 8px;
+    border: 1px solid var(--clr-surface-a30);
+    background-color: var(--clr-surface-a20);
+    color: var(--clr-light-a0);
 }
 
 .meal-entry-view button:hover {
-  background-color: var(--clr-surface-a50);
+    background-color: var(--clr-primary-a10);
 }
 
-
-#navigation-button-container{
+/* Layout */
+#navigation-button-container {
     margin-left: auto;
     display: flex;
     justify-content: space-around;
     gap: 25px;
-    padding: 25px 0 25px 0;
+    padding: 25px 0;
 }
 
-.nav-button{
+.nav-button {
     width: 100%;
-    padding: 10px 40px 10px 40px;
+    padding: 10px 40px;
 }
 
-.content-container{
+.content-container {
     width: 80%;
+    margin: 0 auto;
 }
-.add-meal-container{
+
+.add-meal-container {
     display: flex;
     justify-content: flex-end;
     padding: 10px 0 10px 10px;
 }
 
-.table-container{
+/* Tables */
+.table-container {
     width: 100%;
     gap: 25px;
     display: flex;
     flex-direction: row;
 }
 
-.group-table{
+.group-table {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.group-table > h3{
+.group-table > h3 {
     margin-left: 10px;
 }
 
-.meal-table{
+/* Meal table card */
+.meal-table {
     width: 100%;
     background-color: var(--clr-surface-a20);
     border-radius: 15px;
     border-collapse: collapse;
     overflow: hidden;
-}
-
-
-.meal-table tbody {
-    display: block;
-    height: 400px;
-    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
 
 .meal-table thead,
@@ -171,16 +185,36 @@
 .meal-table tbody {
     display: block;
     height: fit-content;
+    max-height: 400px;
     overflow-y: auto;
 }
 
-td > h4{
-    margin: 0;
-    padding: 10px;
-    opacity: 60%;
+.meal-table-header {
+    background-color: var(--clr-surface-a10);
 }
 
-tbody td{
+.meal-table tbody tr:nth-child(even) {
+    background-color: var(--clr-surface-a30);
+}
+
+tbody tr {
+    cursor: pointer;
+    height: 40px;
+    transition: background-color 0.15s ease, transform 0.08s ease;
+}
+
+.meal-table tbody tr:hover {
+    background-color: var(--clr-surface-a40);
+    transform: translateY(-1px);
+}
+
+td > h4 {
+    margin: 0;
+    padding: 10px;
+    opacity: 0.6;
+}
+
+tbody td {
     margin: 0;
     padding: 10px;
     font-family: "Montserrat", sans-serif;
@@ -188,28 +222,8 @@ tbody td{
     font-weight: bold;
 }
 
-.meal-table-header{
-    background-color: var(--clr-surface-a10);
-}
-.meal-table-body{
-    overflow-y: scroll;
-}
-.meal-table tbody tr:nth-child(even) {
-    background-color: var(--clr-surface-a30);
-}
-
-
-tbody tr{
-    cursor: pointer;
-    height: 40px
-}
-
-.meal-table tbody tr:hover{
-    background-color: var(--clr-surface-a40);
-}
-
-
-.totals-container{
+/* Totals cards */
+.totals-container {
     display: flex;
     flex-direction: row;
     gap: 25px;
@@ -218,47 +232,35 @@ tbody tr{
     margin-top: 25px;
 }
 
-.total-container{
+.total-container {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    background-color: var(--clr-surface-a20);
-    border-radius: 15px;
+    background: radial-gradient(circle at top, var(--clr-surface-tonal-a10), var(--clr-surface-a20));
+    border-radius: 20px;
     padding: 40px;
     text-align: center;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-.total-container h1, .total-container h3{
+.total-container h1,
+.total-container h3 {
     margin: 0;
 }
 
-#search-select{
+#search-select {
     height: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--clr-surface-a30);
+    background-color: var(--clr-surface-a20);
+    color: var(--clr-light-a0);
 }
 
-td > button{
-    padding: 5px;
+td > button {
+    padding: 5px 14px;
     background: none;
-}
-
-.meal-detail-row{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 0 10px 0;
-    gap: 25px;
-
-}
-
-.meal-detail-column{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.meal-detail-column h3, .meal-detail-column p{
-    margin: 0;
+    border-radius: 999px;
 }
