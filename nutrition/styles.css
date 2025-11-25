@@ -90,7 +90,7 @@
     justify-content: flex-end;
 }
 
-#exit-meal-entry-view {
+#exit-meal-entry-view, #exit-meal-view {
     padding: 3px;
     color: var(--clr-light-a0);
     opacity: 60%;
@@ -241,4 +241,24 @@ tbody tr{
 td > button{
     padding: 5px;
     background: none;
+}
+
+.meal-detail-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0 10px 0;
+    gap: 25px;
+
+}
+
+.meal-detail-column{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.meal-detail-column h3, .meal-detail-column p{
+    margin: 0;
 }

@@ -5,14 +5,91 @@
     <title>Ascend: fitness</title>
     <link rel="stylesheet" href="../../styles/colors.css">
     <link rel="stylesheet" href="../../styles/styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header class="flex-row">
         <h1 id="date-container"></h1>
         <div id="account-button-container">
+            <button class="attention" id="delete-button">Delete</button>
             <button id="back-button">Back</button>
         </div>
     </header>
+    <div class="exercise-entry-container hidden" id="exercise-entry-container">
+        <div class="centered-container fill">
+            <div class="exercise-entry-view">
+                <div class="exercise-entry-exit-container">
+                    <button id="exit-exercise-entry-view">x</button>
+                </div>
+                <label>
+                    <span>Exercise</span>
+                    <input list="exercise-options" id="exercise-input" placeholder="Choose or type..." />
+
+                    <datalist id="exercise-options">
+                    </datalist>
+                </label>
+
+                <label>
+                    <span>Sets</span>
+                    <input type="number" id="set-input" name="sets" placeholder="Enter number of sets" required/>
+                </label>
+                <label>
+                    <span>Reps</span>
+                    <input type="number" id="rep-input" name="reps" placeholder="Enter number of reps" required/>
+                </label>
+                <label>
+                    <span>Weight</span>
+                    <input type="number" id="weight-input" name="weight" placeholder="Enter weight used" required/>
+                </label>
+
+                <button type="submit" id="add-exercise">Add Exercise</button>
+            </div>
+        </div>
+    </div>
+    <div class="exercise-entry-container hidden" id="exercise-view-container">
+        <div class="centered-container fill">
+            <div class="exercise-entry-view">
+                <div class="exercise-entry-exit-container">
+                    <button id="exit-exercise-view">x</button>
+                </div>
+
+                <div class="exercise-detail-row">
+                    <div class="exercise-detail-column">
+                        <h3>Name</h3>
+                        <p id="exercise-view"></p>
+                    </div>
+
+                </div>
+                <div class="exercise-detail-row">
+                    <div class="exercise-detail-column">
+                        <h3>Total Reps</h3>
+                        <p id="total-rep-view"></p>
+                    </div>
+                    <div class="exercise-detail-column">
+                        <h3>Total Volume</h3>
+                        <p id="volume-view"></p>
+                    </div>
+                </div>
+                <div class="exercise-detail-row">
+                    <div class="exercise-detail-column">
+                        <h3>Sets</h3>
+                        <p id="set-view"></p>
+                    </div>
+                    <div class="exercise-detail-column">
+                        <h3>Reps</h3>
+                        <p id="rep-view"></p>
+                    </div>
+                    <div class="exercise-detail-column">
+                        <h3>Weight</h3>
+                        <p id="weight-view"></p>
+                    </div>
+                </div>
+
+
+                <button class="attention" type="submit" id="delete-exercise">Delete Exercise</button>
+            </div>
+        </div>
+    </div>
     <div class="centered-container">
         <div class="content-container">
             <div class="add-exercise-container">
@@ -23,8 +100,8 @@
                 <thead class="exercise-table-header">
                     <tr>
                         <td><h4>Name</h4></td>
-                        <td><h4>Reps</h4></td>
                         <td><h4>Sets</h4></td>
+                        <td><h4>Reps</h4></td>
                         <td><h4>Weight</h4></td>
                     </tr>
                 </thead>

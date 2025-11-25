@@ -28,6 +28,15 @@ const chart = new Chart("progressChart", {
 
 
 document.addEventListener("DOMContentLoaded", function() {
+    const navButtons = document.querySelectorAll("#navigation-button-container .nav-button");
+
+    navButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const page = button.innerText.toLowerCase();
+            window.location.href = "../" + page;
+        });
+    });
+
     const bubbles = document.querySelectorAll(".bubble");
     const progressSelect = document.getElementById("progressInput");
     progressSelect.value = "Bench"
