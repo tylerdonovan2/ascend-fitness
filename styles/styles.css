@@ -1,116 +1,155 @@
-html{
+html {
     height: 100%;
     width: 100%;
 }
 
-body{
+body {
     margin: 0;
     padding: 0;
-    background: var(--clr-surface-a0);
+    height: 100%;
     position: relative;
     overflow-x: hidden;
-    height: 100%;
+
+    background:
+        radial-gradient(circle at top, var(--clr-surface-tonal-a10) 0%, var(--clr-surface-a0) 40%, #000000 100%);
 }
 
-
-h1, h2, h3, h4, h5, h6, p, span{
+h1, h2, h3, h4, h5, h6, p, span {
     color: var(--clr-light-a0);
 }
 
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6 {
     font-family: "Montserrat", sans-serif;
 }
 
-p, span{
+p, span {
     font-family: "Source Sans 3", sans-serif;
 }
 
-button{
-    padding: 10px 40px 10px 40px;
-    border-radius: 10px;
-    border: none;
-    background-color: var(--clr-light-a0);
-    font-family:  "Montserrat", sans-serif;
-    font-weight: bold;
+button {
+    padding: 10px 40px;
+    border-radius: 999px;
+    border: 1px solid var(--clr-surface-a40);
+    background-color: var(--clr-surface-a20);
+    color: var(--clr-light-a0);
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
     cursor: pointer;
+    letter-spacing: 0.02em;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    transition:
+        background-color 0.18s ease,
+        color 0.18s ease,
+        transform 0.12s ease,
+        box-shadow 0.15s ease,
+        border-color 0.15s ease;
 }
 
+button:hover {
+    background-color: var(--clr-primary-a10);
+    border-color: var(--clr-primary-a20);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.55);
+}
 
-.flex-row{
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+}
+
+.attention {
+    background-color: var(--clr-primary-a10);
+    color: var(--clr-light-a0);
+    border-color: var(--clr-primary-a20);
+}
+
+.flex-row {
     display: flex;
     flex-direction: row;
 }
 
-.attention{
-    background-color: var(--clr-primary-a10);
-    color: var(--clr-light-a0);
-}
-
-.hidden{
+.hidden {
     display: none !important;
 }
 
-.centered-container{
+.centered-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.fill{
+.fill {
     width: 100%;
     height: 100%;
 }
 
-.divider{
+.divider {
     width: 100%;
     height: 1px;
     background-color: var(--clr-light-a0);
-    opacity: 0.4;
-    margin: 25px 0 25px 0;
+    opacity: 0.18;
+    margin: 25px 0;
 }
 
-
-/*Header styles*/
-header{
-    background-color: var(--clr-surface-a10);
-    padding: 0 25px 0 25px;
+header {
+    background: rgba(12, 12, 14, 0.9);
+    padding: 0 25px;
     margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    min-height: 64px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
 }
 
-#account-button-container{
+.logo-mark {
+    height: 110px;
+    width: auto;
+    margin-right: 12px;
+    border-radius: -2px;
+}
+
+header h1 {
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+
+#account-button-container {
     margin-left: auto;
-    align-content: center;
-    gap: 25px
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
-/*End section*/
 
-
-/*Main view styles*/
-.title{
+.title {
     font-size: 8rem;
     margin: 0;
 }
 
 .text-gradient {
-  color: #e82323;
-  background-image: linear-gradient(135deg, #e82323 0%, #f66550 50%, #ffaa97 100%);
-  background-size: 200% 200%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-  animation: gradientShift 6s linear infinite;
+    color: var(--clr-primary-a0);
+    background-image: linear-gradient(
+      135deg,
+      var(--clr-primary-a0) 0%,
+      var(--clr-primary-a20) 40%,
+      var(--clr-primary-a50) 100%
+    );
+    background-size: 220% 220%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+
+    animation: gradientShift 6s linear infinite;
 }
 
 @keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }

@@ -3,29 +3,28 @@
     --clr-dark-a0: #000000;
     --clr-light-a0: #ffffff;
 
-    /** Theme primary colors */
-    --clr-primary-a0: #e82323;
-    --clr-primary-a10: #ef4939;
-    --clr-primary-a20: #f66550;
-    --clr-primary-a30: #fb7d67;
-    --clr-primary-a40: #ff947f;
-    --clr-primary-a50: #ffaa97;
+    /** Theme primary colors – ORANGE like the logo */
+    --clr-primary-a0: #ff7a00;
+    --clr-primary-a10: #ff8a1a;
+    --clr-primary-a20: #ff9b33;
+    --clr-primary-a30: #ffad4d;
+    --clr-primary-a40: #ffc366;
+    --clr-primary-a50: #ffd88c;
 
-    /** Theme surface colors */
-    --clr-surface-a0: #121212;
-    --clr-surface-a10: #282828;
-    --clr-surface-a20: #3f3f3f;
-    --clr-surface-a30: #575757;
-    --clr-surface-a40: #717171;
-    --clr-surface-a50: #8b8b8b;
+    --clr-surface-a0: #0b0b0d;
+    --clr-surface-a10: #18181c;
+    --clr-surface-a20: #252528;
+    --clr-surface-a30: #3a3a3f;
+    --clr-surface-a40: #515158;
+    --clr-surface-a50: #6b6b75;
 
-    /** Theme tonal surface colors */
-    --clr-surface-tonal-a0: #261815;
-    --clr-surface-tonal-a10: #3b2d2a;
-    --clr-surface-tonal-a20: #514441;
-    --clr-surface-tonal-a30: #685c59;
-    --clr-surface-tonal-a40: #7f7572;
-    --clr-surface-tonal-a50: #978f8d;
+    /** Theme tonal surface colors – warm/dim like logo bg */
+    --clr-surface-tonal-a0: #241612;
+    --clr-surface-tonal-a10: #34231f;
+    --clr-surface-tonal-a20: #43302b;
+    --clr-surface-tonal-a30: #543d37;
+    --clr-surface-tonal-a40: #664a44;
+    --clr-surface-tonal-a50: #7a5b55;
 
     /** Success colors */
     --clr-success-a0: #22946e;
